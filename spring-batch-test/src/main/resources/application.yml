@@ -1,0 +1,11 @@
+spring:
+  batch:
+    job:
+      enabled: false
+
+    initialize-schema: never
+
+  datasource:
+    url: jdbc:h2:mem:mydb
+    driverClassName: org.h2.Driver
+    username: sa
