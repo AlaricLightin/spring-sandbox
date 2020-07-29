@@ -1,0 +1,1 @@
+Эксперимент с использованием StaxEventItemReaderBuilder в Spring Batch

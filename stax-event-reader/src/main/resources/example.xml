@@ -1,0 +1,14 @@
+<root>
+    <parentSection>
+        <element attr="1" secAttr="11">
+            <subElement>SubElement Text 1</subElement>
+        </element>
+        <element attr="2" secAttr="22">
+            <subElement>SubElement Text 2</subElement>
+            <secSubElement>Another Text</secSubElement>
+        </element>
+        <element attr="3" secAttr="33">
+            <subElement>SubElement Text 3</subElement>
+        </element>
+    </parentSection>
+</root>
