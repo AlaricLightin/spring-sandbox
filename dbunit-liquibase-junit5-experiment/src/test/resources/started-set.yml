@@ -1,0 +1,4 @@
+my_users:
+  - id: 1
+    name: "Username"
+    group_id: 1
