@@ -1,17 +1,26 @@
 <template>
   <div id="app">
-    <root-element/>
+    <div id="nav">
+        <router-link to="/">Home</router-link>
+        |
+        <router-link to="/login">Login</router-link>
+        |
+        <a v-on:click="logout()">Logout</a>
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import RootElement from "@/components/RootElement";
-
 export default {
-  name: 'App',
-  components: {
-      RootElement,
-  }
+    methods: {
+        logout() {
+            this.$store.dispatch('authentication/logout')
+                .finally(() => {
+                    this.$router.push('login');
+                })
+        }
+    }
 }
 </script>
 
@@ -22,6 +31,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
 </style>

@@ -3,6 +3,7 @@ package com.example.securityandvue.controllers;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.Map;
 import java.util.UUID;
 
@@ -14,5 +15,10 @@ public class ResourceController {
                 "id", UUID.randomUUID().toString(),
                 "content", "Hello world"
         );
+    }
+
+    @GetMapping("/user")
+    public Principal user(Principal user) {
+        return user;
     }
 }
