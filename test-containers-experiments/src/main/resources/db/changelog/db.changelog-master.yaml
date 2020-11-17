@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - changeSet:
+      - id: 1
+      - author: Alaric
+      - createTable:
+          tableName: users
+          columns:
+            - column:
+                name: id
+                type: bigint
+                autoIncrement: true
+                startWith: 1
+                incrementBy: 1
+                constraints:
+                  nullable: false
+                  primaryKey: true
+
+            - column:
+                name: name
+                type: varchar(255)
+
+      - insert:
+          tableName: users
+          columns:
+            - column:
+                name: id
+                value: 100
+            - column:
+                name: name
+                value: Name
