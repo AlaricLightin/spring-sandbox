@@ -18,7 +18,7 @@
         </rollback>
     </changeSet>
 
-    <changeSet id="1" author="Alaric">
+    <changeSet id="1-tables" author="Alaric">
         <createTable tableName="projects" schemaName="projects">
             <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
                 <constraints primaryKey="true" nullable="false"/>
@@ -47,6 +47,18 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="1-views" author="Alaric">
+        <createView viewName="v_documents"
+                    schemaName="documents"
+                    replaceIfExists="true"
+        >
+            SELECT documents.documents.id AS id, documents.documents.content AS content,
+                projects.projects.title AS project_title
+            FROM documents.documents
+            LEFT JOIN projects.projects ON documents.documents.project_id = projects.projects.id;
+        </createView>
     </changeSet>
 
     <changeSet id="1-start-data" author="Alaric">
