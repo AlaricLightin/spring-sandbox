@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql:documents-test
+    username: springuser
+    password: 123
+
+  liquibase:
+    change-log: classpath:db/changelog/init.xml
+    drop-first: true
+
+  batch:
+    table-prefix: spring_batch.BATCH_
+    job:
+      enabled: true
+    initialize-schema: never
