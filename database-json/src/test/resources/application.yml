@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:12.5-alpine:///
+    initialization-mode: always
+
+  jpa:
+    hibernate:
+      ddl-auto: none

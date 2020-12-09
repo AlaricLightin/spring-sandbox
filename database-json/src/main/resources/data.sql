@@ -1,0 +1,1 @@
+INSERT INTO json_table (id, json_field) VALUES (100, '{"intField": 10, "stringField": "String 1"}'::json);
