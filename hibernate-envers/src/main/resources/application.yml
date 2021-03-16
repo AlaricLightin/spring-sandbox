@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    initialization-mode: always
+    url: jdbc:postgresql:hibernate-envers-test
+    username: springuser
+    password: 123
+
+  jpa:
+    hibernate:
+      ddl-auto: none
