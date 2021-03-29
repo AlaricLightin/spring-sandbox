@@ -8,3 +8,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
+
+  security:
+    user:
+      name: user
+      password: password

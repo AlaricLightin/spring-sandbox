@@ -2,10 +2,14 @@ package com.example.hibernateenvers.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.envers.AuditJoinTable;
 import org.hibernate.envers.AuditTable;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -24,4 +28,12 @@ public class CustomUser {
 
     @Column(name = "comment", nullable = false)
     private String comment;
+
+    @ElementCollection(fetch = FetchType.EAGER, targetClass = String.class)
+    @CollectionTable(name = "authorities", joinColumns = @JoinColumn(name = "user_id"))
+    @Fetch(FetchMode.SUBSELECT)
+    @Column(name = "role", nullable = false)
+    @Audited
+    @AuditJoinTable(name = "roles_audit")
+    private Set<String> roles;
 }
