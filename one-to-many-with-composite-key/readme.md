@@ -1,0 +1,1 @@
+Example with entity relationship "One to many" and composite primary key in child entity.

@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:tc:postgresql:12.6-alpine:///
+
+  jpa:
+    hibernate:
+      ddl-auto: none
