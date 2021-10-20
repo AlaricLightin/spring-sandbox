@@ -1,17 +1,17 @@
 <template>
-    <form role="form">
-        <div class="form-group">
+    <div>
+        <div>
             <label for="username">Username:</label> <input type="text"
-                                                           class="form-control" id="username" name="username"
+                                                           id="username" name="username"
                                                            v-model="credentials.username"/>
         </div>
-        <div class="form-group">
+        <div>
             <label for="password">Password:</label> <input type="password"
-                                                           class="form-control" id="password" name="password"
+                                                           id="password" name="password"
                                                            v-model="credentials.password"/>
         </div>
         <button class="btn btn-primary" v-on:click="login()">Submit</button>
-    </form>
+    </div>
 </template>
 
 <script>

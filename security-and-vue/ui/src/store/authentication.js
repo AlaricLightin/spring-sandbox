@@ -1,21 +1,28 @@
 import axios from 'axios'
 
 const state = {
-    authenticated: false
+    authenticated: false,
+    username: ''
 }
 
 const getters = {}
 
 const actions = {
     authenticate({commit}, payload) {
+        const data =
+            'username=' +
+            encodeURIComponent(payload.username) +
+            '&password=' +
+            encodeURIComponent(payload.password) +
+            '&submit=Login';
+
         return axios
-            .get('user', {
-                auth: {
-                    username: payload.username,
-                    password: payload.password
-                }
+            .post('/authentication', data, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
             })
-            .then(r => commit('SET_AUTHENTICATED', !!r.data.name))
+            .then(r => commit('SET_AUTHENTICATED', !!r.data.user))
             .catch(() => commit('SET_AUTHENTICATED', false));
     },
 
