@@ -1,8 +1,10 @@
 package com.example.securityandvue.security;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
@@ -33,11 +35,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
 
                 .and()
+                .rememberMe()
+
+                .and()
                     .authorizeRequests()
                     .antMatchers("/", "/resource", "/user", "/logout").permitAll()
                     .anyRequest().authenticated()
                 .and()
                     .csrf()
                     .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
+                .withUser("admin").password("admin1pass").roles("USER").and()
+                .withUser("user").password("password").roles("USER");
     }
 }

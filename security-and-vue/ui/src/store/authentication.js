@@ -1,4 +1,5 @@
 import axios from 'axios'
+import VueCookies from 'vue-cookies'
 
 const state = {
     authenticated: false,
@@ -14,6 +15,8 @@ const actions = {
             encodeURIComponent(payload.username) +
             '&password=' +
             encodeURIComponent(payload.password) +
+            '&remember-me=true' +
+            // this.rememberMe +
             '&submit=Login';
 
         return axios
@@ -30,6 +33,14 @@ const actions = {
         return axios
             .post('logout', {})
             .finally(() => commit('SET_AUTHENTICATED', false));
+    },
+
+    retrieveUser({commit}) {
+        const token = VueCookies.get('JSESSIONID') || VueCookies.get('XSRF-TOKEN');
+        if (token)
+            return axios
+                .get('/user')
+                .then(r => commit('SET_AUTHENTICATED', !!r.data.principal));
     }
 }
 
