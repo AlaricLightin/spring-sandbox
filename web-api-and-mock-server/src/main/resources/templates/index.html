@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Get cat facts</title>
+
+    <script type="text/javascript" th:src="@{/webjars/htmx.org/1.7.0/dist/htmx.min.js}"></script>
+</head>
+<body>
+<button hx-post="/clicked"
+        hx-trigger="click"
+        hx-target="#fact-content"
+        hx-swap="afterend"
+>
+    Get cat fact
+</button>
+<div id="fact-content"></div>
+</body>
+</html>
