@@ -1,5 +1,6 @@
 package com.example.telegramechobot.bot;
 
+import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -9,25 +10,26 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 @Component
 public class EchoBot extends TelegramLongPollingBot{
     private final TelegramBotConfig config;
+    private final IncomingMessageGateway incomingMessageGateway;
 
-    public EchoBot(TelegramBotConfig config) {
+    public EchoBot(
+        TelegramBotConfig config,
+        IncomingMessageGateway incomingMessageGateway) {
+        
         super(config.getToken());
-        this.config = config;   
+        this.config = config;
+        this.incomingMessageGateway = incomingMessageGateway;
     }
 
     @Override
     public void onUpdateReceived(Update update) {
-        String messageText = update.getMessage().getText();
-        long chatId = update.getMessage().getChatId();
-        sendText(chatId, messageText);
+        incomingMessageGateway.sendUpdate(update);
     }
 
-    public void sendText(Long who, String what){
-        SendMessage sm = SendMessage.builder()
-                         .chatId(who.toString()) //Who are we sending a message to
-                         .text(what).build();    //Message content
+    @ServiceActivator(inputChannel = "outcomingMessagesChannel")
+    public void sendMessage(SendMessage sendMessage){
         try {
-             execute(sm);                        //Actually sending the message
+             execute(sendMessage);                        //Actually sending the message
         } catch (TelegramApiException e) {
              throw new RuntimeException(e);      //Any error will be printed here
         }
